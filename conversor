@@ -1,0 +1,64 @@
+📌 Conversor.java
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
+
+public class Conversor {
+
+    private static final String API_KEY = "TU_API_KEY"; // Reemplaza con tu clave de ExchangeRate
+    private static final String URL_BASE = "https://v6.exchangerate-api.com/v6/";
+
+    public static void ejecutarMenu() throws IOException, InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+
+        do {
+            System.out.println("\n=== Conversor de Monedas ===");
+            System.out.println("1) Dólar (USD) → Peso Argentino (ARS)");
+            System.out.println("2) Real Brasileño (BRL) → Dólar (USD)");
+            System.out.println("3) Peso Colombiano (COP) → Dólar (USD)");
+            System.out.println("4) Salir");
+            System.out.print("Elija una opción: ");
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1 -> convertirMoneda("USD", "ARS");
+                case 2 -> convertirMoneda("BRL", "USD");
+                case 3 -> convertirMoneda("COP", "USD");
+                case 4 -> System.out.println("Saliendo del programa...");
+                default -> System.out.println("Opción no válida, intente de nuevo.");
+            }
+        } while (opcion != 4);
+    }
+
+    private static void convertirMoneda(String base, String destino) throws IOException, InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese el monto a convertir: ");
+        double monto = sc.nextDouble();
+
+        String url = URL_BASE + API_KEY + "/pair/" + base + "/" + destino;
+        double tasa = obtenerTasa(url);
+
+        double resultado = monto * tasa;
+        System.out.printf("%.2f %s equivale a %.2f %s\n", monto, base, resultado, destino);
+    }
+
+    private static double obtenerTasa(String urlFinal) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(urlFinal))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+        return json.get("conversion_rate").getAsDouble();
+    }
+}
