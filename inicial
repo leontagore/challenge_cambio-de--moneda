@@ -1,0 +1,38 @@
+conversor-moneda/
+ ├── src/
+ │    └── ConversorApp.java
+ │    └── Conversor.java
+ ├── lib/   (aquí va gson-x.x.x.jar)
+ ├── README.md
+
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+
+HttpClient client = HttpClient.newHttpClient();
+HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("https://v6.exchangerate-api.com/v6/TU_API_KEY/pair/USD/ARS"))
+        .build();
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+double tasa = json.get("conversion_rate").getAsDouble();
+System.out.println("Tasa USD a ARS: " + tasa);
+
+
+public static double convertir(double monto, double tasa) {
+    return monto * tasa;
+}
+
+
+Scanner sc = new Scanner(System.in);
+System.out.println("Bienvenido al Conversor de Monedas");
+System.out.println("1) Dólar a Peso Argentino");
+System.out.println("2) Real Brasileño a Dólar");
+System.out.println("3) Peso Colombiano a Dólar");
+System.out.println("4) Salir");
+
+
