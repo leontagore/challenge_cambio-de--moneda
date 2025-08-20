@@ -1,0 +1,103 @@
+# 💱 Conversor de Moneda en Java  
+
+Proyecto desarrollado como parte del **Challenge ONE - Java - Back End**.  
+Este programa de consola permite convertir entre diferentes monedas en tiempo real utilizando la API [ExchangeRate-API](https://www.exchangerate-api.com/).  
+
+---
+
+## 🚀 Funcionalidades  
+- Conversión entre distintas monedas:  
+  - USD → ARS (Dólar a Peso Argentino)  
+  - BRL → USD (Real Brasileño a Dólar)  
+  - COP → USD (Peso Colombiano a Dólar)  
+- Consumo de datos en tiempo real desde una API.  
+- Interfaz simple mediante consola con menú interactivo.  
+- Cálculos precisos con tasas actualizadas.  
+
+---
+
+## 🛠️ Tecnologías utilizadas  
+- **Java 11+**  
+- **HttpClient (Java)** para solicitudes HTTP.  
+- **Gson (Google)** para analizar respuestas en formato JSON.  
+- **ExchangeRate-API** (gratuita con registro).  
+
+---
+
+## ⚙️ Instalación y configuración  
+
+### 1️⃣ Clonar repositorio  
+```bash
+git clone https://github.com/TU_USUARIO/conversor-moneda.git
+cd conversor-moneda
+
+
+2️⃣ Instalar dependencias
+
+Descargar Gson
+ (última versión).
+
+Crear carpeta lib/ dentro del proyecto y colocar el archivo .jar.
+
+3️⃣ Configurar API Key
+
+Regístrate en ExchangeRate-API
+.
+
+Copia tu API Key y pégala en la clase Conversor.java:
+
+private static final String API_KEY = "TU_API_KEY";
+
+4️⃣ Compilar y ejecutar
+
+En consola (Windows):
+
+javac -cp ".;lib/gson-2.10.1.jar" src/*.java
+java -cp ".;lib/gson-2.10.1.jar;src" ConversorApp
+
+En Linux/Mac:
+
+javac -cp ".:lib/gson-2.10.1.jar" src/*.java
+java -cp ".:lib/gson-2.10.1.jar:src" ConversorApp
+
+
+▶️ Ejemplo de uso
+
+=== Conversor de Monedas ===
+1) Dólar (USD) → Peso Argentino (ARS)
+2) Real Brasileño (BRL) → Dólar (USD)
+3) Peso Colombiano (COP) → Dólar (USD)
+4) Salir
+Elija una opción: 1
+Ingrese el monto a convertir: 25
+25.00 USD equivale a 20293.75 ARS
+
+
+✨ Extras implementables (opcional)
+
+Historial de conversiones: mostrar un listado de las últimas conversiones.
+
+Más monedas: agregar CLP, EUR, MXN, etc.
+
+Registros con marca de tiempo usando LocalDateTime.
+
+Ejemplo de registro:
+
+2025-08-19T15:40 - 25 USD → 20293.75 ARS
+
+👨‍💻 Autor  by Leontagore 
+
+Proyecto desarrollado como parte del Programa ONE - Oracle + Alura Latam.
+
+
+---
+
+👉 Este `README.md` cumple exactamente con lo que pide el PDF:  
+- Explica el proyecto.  
+- Instrucciones claras de instalación y ejecución.  
+- Ejemplo de uso.  
+- Espacio para capturas y video demo.  
+- Sección de extras opcionales.  
+
+¿Quieres que además te prepare un **ejemplo de historial de conversiones** 
+
